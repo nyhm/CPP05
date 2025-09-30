@@ -1,12 +1,12 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
 // Orthodox Canonical Form
-Form::Form() : _name("Unknown"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150)
+AForm::AForm() : _name("Unknown"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150)
 {
 }
 
-Form::Form(const std::string& name, int gradeToSign, int gradeToExecute) 
+AForm::AForm(const std::string& name, int gradeToSign, int gradeToExecute) 
     : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
     if (gradeToSign < 1 || gradeToExecute < 1)
@@ -15,12 +15,12 @@ Form::Form(const std::string& name, int gradeToSign, int gradeToExecute)
         throw GradeTooLowException();
 }
 
-Form::Form(const Form& other) 
+AForm::AForm(const AForm& other) 
     : _name(other._name), _isSigned(other._isSigned), _gradeToSign(other._gradeToSign), _gradeToExecute(other._gradeToExecute)
 {
 }
 
-Form& Form::operator=(const Form& other)
+AForm& AForm::operator=(const AForm& other)
 {
     if (this != &other)
     {
@@ -31,33 +31,33 @@ Form& Form::operator=(const Form& other)
     return *this;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
 }
 
 // Getters
-const std::string& Form::getName() const
+const std::string& AForm::getName() const
 {
     return _name;
 }
 
-bool Form::getIsSigned() const
+bool AForm::getIsSigned() const
 {
     return _isSigned;
 }
 
-int Form::getGradeToSign() const
+int AForm::getGradeToSign() const
 {
     return _gradeToSign;
 }
 
-int Form::getGradeToExecute() const
+int AForm::getGradeToExecute() const
 {
     return _gradeToExecute;
 }
 
 // Member functions
-void Form::beSigned(const Bureaucrat& bureaucrat)
+void AForm::beSigned(const Bureaucrat& bureaucrat)
 {
     if (bureaucrat.getGrade() > _gradeToSign)
         throw GradeTooLowException();
@@ -65,23 +65,23 @@ void Form::beSigned(const Bureaucrat& bureaucrat)
 }
 
 // Exception implementations
-const char* Form::GradeTooHighException::what() const throw()
+const char* AForm::GradeTooHighException::what() const throw()
 {
     return "Grade is too high (must be >= 1)";
 }
 
-const char* Form::GradeTooLowException::what() const throw()
+const char* AForm::GradeTooLowException::what() const throw()
 {
     return "Grade is too low (must be <= 150)";
 }
 
-const char* Form::FormNotSignedException::what() const throw()
+const char* AForm::AFormNotSignedException::what() const throw()
 {
     return "Form is not signed";
 }
 
 // Overload of the insertion operator
-std::ostream& operator<<(std::ostream& os, const Form& form)
+std::ostream& operator<<(std::ostream& os, const AForm& form)
 {
     os << "Form name: " << form.getName() 
        << ", signed: " << (form.getIsSigned() ? "true" : "false")

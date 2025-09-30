@@ -1,5 +1,5 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include <iostream>
 #include <string>
@@ -7,7 +7,7 @@
 
 class Bureaucrat; // Forward declaration
 
-class Form
+class AForm
 {
 private:
     const std::string   _name;
@@ -17,11 +17,11 @@ private:
 
 public:
     // Orthodox Canonical Form
-    Form();
-    Form(const std::string& name, int gradeToSign, int gradeToExecute);
-    Form(const Form& other);
-    Form& operator=(const Form& other);
-    ~Form();
+    AForm();
+    AForm(const std::string& name, int gradeToSign, int gradeToExecute);
+    AForm(const AForm& other);
+    AForm& operator=(const AForm& other);
+    virtual ~AForm();
 
     // Getters
     const std::string&  getName() const;
@@ -46,7 +46,7 @@ public:
         virtual const char* what() const throw();
     };
 
-    class FormNotSignedException : public std::exception
+    class AFormNotSignedException : public std::exception
     {
     public:
         virtual const char* what() const throw();
@@ -54,6 +54,6 @@ public:
 };
 
 // Overload of the insertion operator
-std::ostream& operator<<(std::ostream& os, const Form& form);
+std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif

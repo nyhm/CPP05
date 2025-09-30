@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 // Orthodox Canonical Form
 Bureaucrat::Bureaucrat() : _name("Unknown"), _grade(150)
@@ -59,13 +59,13 @@ void Bureaucrat::decrementGrade()
     _grade++;
 }
 
-void Bureaucrat::signForm(const Form& form)
+void Bureaucrat::signForm(const AForm& form)
 {
     try
     {
         // We need to call beSigned on a non-const Form, but we have a const Form
         // So we need to create a temporary non-const reference
-        Form& nonConstForm = const_cast<Form&>(form);
+        AForm& nonConstForm = const_cast<AForm&>(form);
         nonConstForm.beSigned(*this);
         std::cout << _name << " signed " << form.getName() << std::endl;
     }
@@ -75,7 +75,7 @@ void Bureaucrat::signForm(const Form& form)
     }
 }
 
-void Bureaucrat::executeForm(const Form& form)
+void Bureaucrat::executeForm(const AForm& form)
 {
     try
     {

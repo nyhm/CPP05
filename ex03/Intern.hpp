@@ -1,7 +1,7 @@
 #ifndef INTERN_HPP
 #define INTERN_HPP
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -17,13 +17,13 @@ public:
     ~Intern();
 
     // Main function
-    Form* makeForm(const std::string& formName, const std::string& target);
+    AForm* makeForm(const std::string& formName, const std::string& target);
 
 private:
     // Private helper functions for creating specific forms
-    Form* createShrubberyCreationForm(const std::string& target);
-    Form* createRobotomyRequestForm(const std::string& target);
-    Form* createPresidentialPardonForm(const std::string& target);
+    AForm* createShrubberyCreationForm(const std::string& target);
+    AForm* createRobotomyRequestForm(const std::string& target);
+    AForm* createPresidentialPardonForm(const std::string& target);
 };
 
 #endif

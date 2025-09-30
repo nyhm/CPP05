@@ -4,17 +4,17 @@
 
 // Orthodox Canonical Form
 PresidentialPardonForm::PresidentialPardonForm() 
-    : Form("Presidential Pardon", 25, 5), _target("Unknown")
+    : AForm("Presidential Pardon", 25, 5), _target("Unknown")
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const std::string& target) 
-    : Form("Presidential Pardon", 25, 5), _target(target)
+    : AForm("Presidential Pardon", 25, 5), _target(target)
 {
 }
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) 
-    : Form(other), _target(other._target)
+    : AForm(other), _target(other._target)
 {
 }
 
@@ -22,7 +22,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 {
     if (this != &other)
     {
-        Form::operator=(other);
+        AForm::operator=(other);
         _target = other._target;
     }
     return *this;
@@ -36,7 +36,7 @@ PresidentialPardonForm::~PresidentialPardonForm()
 void PresidentialPardonForm::execute(const Bureaucrat& executor) const
 {
     if (!getIsSigned())
-        throw FormNotSignedException();
+        throw AFormNotSignedException();
     if (executor.getGrade() > getGradeToExecute())
         throw GradeTooLowException();
     

@@ -6,17 +6,17 @@
 
 // Orthodox Canonical Form
 RobotomyRequestForm::RobotomyRequestForm() 
-    : Form("Robotomy Request", 72, 45), _target("Unknown")
+    : AForm("Robotomy Request", 72, 45), _target("Unknown")
 {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& target) 
-    : Form("Robotomy Request", 72, 45), _target(target)
+    : AForm("Robotomy Request", 72, 45), _target(target)
 {
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) 
-    : Form(other), _target(other._target)
+    : AForm(other), _target(other._target)
 {
 }
 
@@ -24,7 +24,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 {
     if (this != &other)
     {
-        Form::operator=(other);
+        AForm::operator=(other);
         _target = other._target;
     }
     return *this;
@@ -38,7 +38,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 void RobotomyRequestForm::execute(const Bureaucrat& executor) const
 {
     if (!getIsSigned())
-        throw FormNotSignedException();
+        throw AFormNotSignedException();
     if (executor.getGrade() > getGradeToExecute())
         throw GradeTooLowException();
     

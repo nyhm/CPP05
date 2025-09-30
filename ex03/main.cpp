@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -107,7 +107,7 @@ int main()
     try
     {
         Intern intern;
-        Form* form = intern.makeForm("shrubbery creation", "Garden");
+        AForm* form = intern.makeForm("shrubbery creation", "Garden");
         if (form != NULL)
         {
             printSuccess("実際の結果: " + std::string(form->getName()) + " が作成されました");
@@ -138,7 +138,7 @@ int main()
     try
     {
         Intern intern;
-        Form* form = intern.makeForm("robotomy request", "Bender");
+        AForm* form = intern.makeForm("robotomy request", "Bender");
         if (form != NULL)
         {
             printSuccess("実際の結果: " + std::string(form->getName()) + " が作成されました");
@@ -169,7 +169,7 @@ int main()
     try
     {
         Intern intern;
-        Form* form = intern.makeForm("presidential pardon", "Prisoner");
+        AForm* form = intern.makeForm("presidential pardon", "Prisoner");
         if (form != NULL)
         {
             printSuccess("実際の結果: " + std::string(form->getName()) + " が作成されました");
@@ -200,7 +200,7 @@ int main()
     try
     {
         Intern intern;
-        Form* form = intern.makeForm("SHRUBBERY CREATION", "Forest");
+        AForm* form = intern.makeForm("SHRUBBERY CREATION", "Forest");
         if (form != NULL)
         {
             printSuccess("実際の結果: " + std::string(form->getName()) + " が作成されました");
@@ -231,7 +231,7 @@ int main()
     try
     {
         Intern intern;
-        Form* form = intern.makeForm("invalid form", "Target");
+        AForm* form = intern.makeForm("invalid form", "Target");
         if (form == NULL)
         {
             printSuccess("実際の結果: NULLが返され、エラーメッセージが表示されました");
@@ -264,7 +264,7 @@ int main()
         Intern intern;
         Bureaucrat bureaucrat("Alice", 1);
         
-        Form* form = intern.makeForm("robotomy request", "Test Subject");
+        AForm* form = intern.makeForm("robotomy request", "Test Subject");
         if (form != NULL)
         {
             printInfo("書類作成後、官僚による処理:");
@@ -304,9 +304,9 @@ int main()
         intern3 = intern1;  // Assignment operator
         
         // Test that both interns can create forms
-        Form* form1 = intern1.makeForm("shrubbery creation", "Garden1");
-        Form* form2 = intern2.makeForm("shrubbery creation", "Garden2");
-        Form* form3 = intern3.makeForm("shrubbery creation", "Garden3");
+        AForm* form1 = intern1.makeForm("shrubbery creation", "Garden1");
+        AForm* form2 = intern2.makeForm("shrubbery creation", "Garden2");
+        AForm* form3 = intern3.makeForm("shrubbery creation", "Garden3");
         
         if (form1 != NULL && form2 != NULL && form3 != NULL)
         {

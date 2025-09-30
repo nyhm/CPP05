@@ -5,17 +5,17 @@
 
 // Orthodox Canonical Form
 ShrubberyCreationForm::ShrubberyCreationForm() 
-    : Form("Shrubbery Creation", 145, 137), _target("Unknown")
+    : AForm("Shrubbery Creation", 145, 137), _target("Unknown")
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) 
-    : Form("Shrubbery Creation", 145, 137), _target(target)
+    : AForm("Shrubbery Creation", 145, 137), _target(target)
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) 
-    : Form(other), _target(other._target)
+    : AForm(other), _target(other._target)
 {
 }
 
@@ -23,7 +23,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 {
     if (this != &other)
     {
-        Form::operator=(other);
+        AForm::operator=(other);
         _target = other._target;
     }
     return *this;
@@ -37,7 +37,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void ShrubberyCreationForm::execute(const Bureaucrat& executor) const
 {
     if (!getIsSigned())
-        throw FormNotSignedException();
+        throw AFormNotSignedException();
     if (executor.getGrade() > getGradeToExecute())
         throw GradeTooLowException();
     

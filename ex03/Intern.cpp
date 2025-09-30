@@ -1,6 +1,9 @@
 #include "Intern.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include <iostream>
-#include <map>
+#include <algorithm> // For std::transform
 
 // Orthodox Canonical Form
 Intern::Intern()
@@ -22,51 +25,75 @@ Intern::~Intern()
 {
 }
 
-// Main function
-Form* Intern::makeForm(const std::string& formName, const std::string& target)
+// Helper function to convert string to lowercase
+std::string toLowerCase(const std::string& str)
 {
-    // Create a map of form names to creator functions
-    typedef Form* (Intern::*FormCreator)(const std::string&);
+    std::string result = str;
+    std::transform(result.begin(), result.end(), result.begin(), ::tolower);
+    return result;
+}
+
+// Helper function to get form type enum
+enum FormType
+{
+    SHRUBBERY_CREATION = 0,
+    ROBOTOMY_REQUEST = 1,
+    PRESIDENTIAL_PARDON = 2,
+    UNKNOWN_FORM = -1
+};
+
+FormType getFormType(const std::string& formName)
+{
+    std::string lowerName = toLowerCase(formName);
     
-    std::map<std::string, FormCreator> formCreators;
-    formCreators["shrubbery creation"] = &Intern::createShrubberyCreationForm;
-    formCreators["robotomy request"] = &Intern::createRobotomyRequestForm;
-    formCreators["presidential pardon"] = &Intern::createPresidentialPardonForm;
-    
-    // Convert form name to lowercase for case-insensitive comparison
-    std::string lowerFormName = formName;
-    for (size_t i = 0; i < lowerFormName.length(); i++)
-    {
-        lowerFormName[i] = std::tolower(lowerFormName[i]);
-    }
-    
-    // Find the creator function
-    std::map<std::string, FormCreator>::iterator it = formCreators.find(lowerFormName);
-    if (it != formCreators.end())
-    {
-        Form* form = (this->*(it->second))(target);
-        std::cout << "Intern creates " << form->getName() << std::endl;
-        return form;
-    }
+    if (lowerName == "shrubbery creation")
+        return SHRUBBERY_CREATION;
+    else if (lowerName == "robotomy request")
+        return ROBOTOMY_REQUEST;
+    else if (lowerName == "presidential pardon")
+        return PRESIDENTIAL_PARDON;
     else
+        return UNKNOWN_FORM;
+}
+
+// Main function using switch statement
+AForm* Intern::makeForm(const std::string& formName, const std::string& target)
+{
+    FormType formType = getFormType(formName);
+    
+    switch (formType)
     {
-        std::cout << "Error: Form '" << formName << "' does not exist" << std::endl;
-        return NULL;
+        case SHRUBBERY_CREATION:
+            std::cout << "Intern creates " << formName << std::endl;
+            return createShrubberyCreationForm(target);
+            
+        case ROBOTOMY_REQUEST:
+            std::cout << "Intern creates " << formName << std::endl;
+            return createRobotomyRequestForm(target);
+            
+        case PRESIDENTIAL_PARDON:
+            std::cout << "Intern creates " << formName << std::endl;
+            return createPresidentialPardonForm(target);
+            
+        case UNKNOWN_FORM:
+        default:
+            std::cout << "Error: Form '" << formName << "' does not exist" << std::endl;
+            return NULL;
     }
 }
 
 // Private helper functions
-Form* Intern::createShrubberyCreationForm(const std::string& target)
+AForm* Intern::createShrubberyCreationForm(const std::string& target)
 {
     return new ShrubberyCreationForm(target);
 }
 
-Form* Intern::createRobotomyRequestForm(const std::string& target)
+AForm* Intern::createRobotomyRequestForm(const std::string& target)
 {
     return new RobotomyRequestForm(target);
 }
 
-Form* Intern::createPresidentialPardonForm(const std::string& target)
+AForm* Intern::createPresidentialPardonForm(const std::string& target)
 {
     return new PresidentialPardonForm(target);
 }

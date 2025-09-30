@@ -5,7 +5,7 @@
 #include <string>
 #include <exception>
 
-class Form; // Forward declaration
+class AForm; // Forward declaration
 
 class Bureaucrat
 {
@@ -28,8 +28,8 @@ public:
     // Member functions
     void                incrementGrade();
     void                decrementGrade();
-    void                signForm(const Form& form);
-    void                executeForm(const Form& form);
+    void                signForm(const AForm& form);
+    void                executeForm(const AForm& form);
 
     // Exception classes
     class GradeTooHighException : public std::exception
