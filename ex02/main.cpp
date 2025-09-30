@@ -4,6 +4,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include <iostream>
+#include <sstream>
 
 // ANSI color codes
 #define RESET   "\033[0m"
@@ -90,9 +91,13 @@ int main()
         Bureaucrat b1("Alice", 1);    // Highest grade
         Bureaucrat b2("Bob", 50);     // Medium grade
         Bureaucrat b3("Charlie", 150); // Lowest grade
-        printSuccess("最高等級官僚: " + std::string(b1.getName()) + " (等級: " + std::to_string(b1.getGrade()) + ")");
-        printSuccess("中級官僚: " + std::string(b2.getName()) + " (等級: " + std::to_string(b2.getGrade()) + ")");
-        printSuccess("最低等級官僚: " + std::string(b3.getName()) + " (等級: " + std::to_string(b3.getGrade()) + ")");
+        std::ostringstream oss1a, oss1b, oss1c;
+        oss1a << b1.getGrade();
+        oss1b << b2.getGrade();
+        oss1c << b3.getGrade();
+        printSuccess("最高等級官僚: " + std::string(b1.getName()) + " (等級: " + oss1a.str() + ")");
+        printSuccess("中級官僚: " + std::string(b2.getName()) + " (等級: " + oss1b.str() + ")");
+        printSuccess("最低等級官僚: " + std::string(b3.getName()) + " (等級: " + oss1c.str() + ")");
         printSuccess("結果: テスト成功 - すべての官僚が正常に作成");
         passed++;
     }
@@ -115,15 +120,22 @@ int main()
         RobotomyRequestForm robotomy("Target");
         PresidentialPardonForm pardon("Prisoner");
         
+        std::ostringstream oss2a, oss2b, oss2c, oss2d, oss2e, oss2f;
+        oss2a << shrubbery.getGradeToSign();
+        oss2b << shrubbery.getGradeToExecute();
+        oss2c << robotomy.getGradeToSign();
+        oss2d << robotomy.getGradeToExecute();
+        oss2e << pardon.getGradeToSign();
+        oss2f << pardon.getGradeToExecute();
         printSuccess("植栽書類: " + std::string(shrubbery.getName()) + 
-                    " (署名等級: " + std::to_string(shrubbery.getGradeToSign()) + 
-                    ", 実行等級: " + std::to_string(shrubbery.getGradeToExecute()) + ")");
+                    " (署名等級: " + oss2a.str() + 
+                    ", 実行等級: " + oss2b.str() + ")");
         printSuccess("ロボトミー書類: " + std::string(robotomy.getName()) + 
-                    " (署名等級: " + std::to_string(robotomy.getGradeToSign()) + 
-                    ", 実行等級: " + std::to_string(robotomy.getGradeToExecute()) + ")");
+                    " (署名等級: " + oss2c.str() + 
+                    ", 実行等級: " + oss2d.str() + ")");
         printSuccess("恩赦書類: " + std::string(pardon.getName()) + 
-                    " (署名等級: " + std::to_string(pardon.getGradeToSign()) + 
-                    ", 実行等級: " + std::to_string(pardon.getGradeToExecute()) + ")");
+                    " (署名等級: " + oss2e.str() + 
+                    ", 実行等級: " + oss2f.str() + ")");
         printSuccess("結果: テスト成功 - すべての書類が正常に作成");
         passed++;
     }
@@ -329,7 +341,9 @@ int main()
         printInfo("ロボトミー書類の複数回実行:");
         for (int i = 0; i < 5; i++)
         {
-            printInfo("実行 " + std::to_string(i + 1) + ":");
+            std::ostringstream oss;
+            oss << (i + 1);
+            printInfo("実行 " + oss.str() + ":");
             b1.executeForm(robotomy3);
         }
         

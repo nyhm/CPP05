@@ -1,6 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 #include <iostream>
+#include <sstream>
 
 // ANSI color codes
 #define RESET   "\033[0m"
@@ -84,7 +85,9 @@ int main()
     try
     {
         Bureaucrat b1("Alice", 50);
-        printSuccess("実際の結果: " + std::string(b1.getName()) + " (等級: " + std::to_string(b1.getGrade()) + ")");
+        std::ostringstream oss1;
+        oss1 << b1.getGrade();
+        printSuccess("実際の結果: " + std::string(b1.getName()) + " (等級: " + oss1.str() + ")");
         printSuccess("結果: テスト成功 - Bureaucratが正常に作成");
         passed++;
     }
@@ -104,9 +107,12 @@ int main()
     try
     {
         Form f1("Tax Form", 30, 20);
+        std::ostringstream oss2a, oss2b;
+        oss2a << f1.getGradeToSign();
+        oss2b << f1.getGradeToExecute();
         printSuccess("実際の結果: " + std::string(f1.getName()) + " (署名: " + (f1.getIsSigned() ? "済み" : "未署名") + 
-                    ", 署名必要等級: " + std::to_string(f1.getGradeToSign()) + 
-                    ", 実行必要等級: " + std::to_string(f1.getGradeToExecute()) + ")");
+                    ", 署名必要等級: " + oss2a.str() + 
+                    ", 実行必要等級: " + oss2b.str() + ")");
         printSuccess("結果: テスト成功 - Formが正常に作成");
         passed++;
     }
