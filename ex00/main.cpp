@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
+#include <sstream>
 
 // ANSI color codes
 #define RESET   "\033[0m"
@@ -85,7 +86,9 @@ int main()
     try
     {
         Bureaucrat b1("Alice", 50);
-        printSuccess("実際の結果: " + std::string(b1.getName()) + " (等級: " + std::to_string(b1.getGrade()) + ")");
+        std::ostringstream oss1;
+        oss1 << b1.getGrade();
+        printSuccess("実際の結果: " + std::string(b1.getName()) + " (等級: " + oss1.str() + ")");
         printSuccess("結果: テスト成功 - コンストラクタが正常に動作");
         passed++;
     }
@@ -145,9 +148,12 @@ int main()
     try
     {
         Bureaucrat b4("David", 3);
-        printInfo("昇進前: " + std::string(b4.getName()) + " (等級: " + std::to_string(b4.getGrade()) + ")");
+        std::ostringstream oss4a, oss4b;
+        oss4a << b4.getGrade();
+        printInfo("昇進前: " + std::string(b4.getName()) + " (等級: " + oss4a.str() + ")");
         b4.incrementGrade();
-        printSuccess("昇進後: " + std::string(b4.getName()) + " (等級: " + std::to_string(b4.getGrade()) + ")");
+        oss4b << b4.getGrade();
+        printSuccess("昇進後: " + std::string(b4.getName()) + " (等級: " + oss4b.str() + ")");
         printSuccess("結果: テスト成功 - 昇進が正常に動作");
         passed++;
     }
@@ -167,9 +173,12 @@ int main()
     try
     {
         Bureaucrat b5("Eve", 148);
-        printInfo("降格前: " + std::string(b5.getName()) + " (等級: " + std::to_string(b5.getGrade()) + ")");
+        std::ostringstream oss5a, oss5b;
+        oss5a << b5.getGrade();
+        printInfo("降格前: " + std::string(b5.getName()) + " (等級: " + oss5a.str() + ")");
         b5.decrementGrade();
-        printSuccess("降格後: " + std::string(b5.getName()) + " (等級: " + std::to_string(b5.getGrade()) + ")");
+        oss5b << b5.getGrade();
+        printSuccess("降格後: " + std::string(b5.getName()) + " (等級: " + oss5b.str() + ")");
         printSuccess("結果: テスト成功 - 降格が正常に動作");
         passed++;
     }
@@ -190,7 +199,9 @@ int main()
     try
     {
         Bureaucrat b6("Frank", 1);
-        printInfo("昇進試行前: " + std::string(b6.getName()) + " (等級: " + std::to_string(b6.getGrade()) + ")");
+        std::ostringstream oss6;
+        oss6 << b6.getGrade();
+        printInfo("昇進試行前: " + std::string(b6.getName()) + " (等級: " + oss6.str() + ")");
         b6.incrementGrade();
         printError("エラー: 昇進が成功してしまいました！");
         printError("結果: テスト失敗 - 例外が投げられるべき");
@@ -213,7 +224,9 @@ int main()
     try
     {
         Bureaucrat b7("Grace", 150);
-        printInfo("降格試行前: " + std::string(b7.getName()) + " (等級: " + std::to_string(b7.getGrade()) + ")");
+        std::ostringstream oss7;
+        oss7 << b7.getGrade();
+        printInfo("降格試行前: " + std::string(b7.getName()) + " (等級: " + oss7.str() + ")");
         b7.decrementGrade();
         printError("エラー: 降格が成功してしまいました！");
         printError("結果: テスト失敗 - 例外が投げられるべき");
@@ -240,9 +253,13 @@ int main()
         Bureaucrat b10("Ivy", 100);
         b10 = b8;  // Assignment operator
         
-        printSuccess("元のオブジェクト: " + std::string(b8.getName()) + " (等級: " + std::to_string(b8.getGrade()) + ")");
-        printSuccess("コピー: " + std::string(b9.getName()) + " (等級: " + std::to_string(b9.getGrade()) + ")");
-        printSuccess("代入後: " + std::string(b10.getName()) + " (等級: " + std::to_string(b10.getGrade()) + ")");
+        std::ostringstream oss8a, oss8b, oss8c;
+        oss8a << b8.getGrade();
+        oss8b << b9.getGrade();
+        oss8c << b10.getGrade();
+        printSuccess("元のオブジェクト: " + std::string(b8.getName()) + " (等級: " + oss8a.str() + ")");
+        printSuccess("コピー: " + std::string(b9.getName()) + " (等級: " + oss8b.str() + ")");
+        printSuccess("代入後: " + std::string(b10.getName()) + " (等級: " + oss8c.str() + ")");
         printSuccess("結果: テスト成功 - OCF実装が正常に動作");
         passed++;
     }
