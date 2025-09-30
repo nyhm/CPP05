@@ -29,6 +29,7 @@ clean:
 # Clean everything
 fclean: clean
 	rm -f $(TARGET)
+	# No generated files to clean in ex00
 
 # Rebuild everything
 re: fclean all
